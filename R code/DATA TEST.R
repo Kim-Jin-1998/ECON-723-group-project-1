@@ -90,7 +90,6 @@ data_inter <- read_csv("/Users/jinkim/Library/CloudStorage/OneDrive-Personal/Auc
 interbank.ts = ts(data_inter$interbank,frequency=12,start = c(2003, 7))
 interbank.ts
 plot.ts(interbank.ts,main="Interbank Rate for 1 Year Period",xlab="month",ylab="interbank rate in percent",frequency=12,start = c(2003, 7))
-plot.ts(interbank.ts,main="Swap Rate for 1 Year Period",xlab="month",ylab="swap rate in percent",frequency=12,start = c(2010, 8))
 acf(interbank.ts,lag.max=48)  #autocorrelation
 acf((interbank.ts-mean(interbank.ts))^2 ,lag.max=48) #Heteroscedasticity 
 adf.test(interbank.ts) #stationary test, Time series are stationary if they do not have trend or seasonal effects, p-value is obtained is greater than significance level of 0.05 and the ADF statistic is higher than any of the critical values. Clearly, there is no reason to reject the null hypothesis. So, the time series is in fact non-stationary.
@@ -103,12 +102,33 @@ plot(data_inter$bond_closing_yields_1year,main="Yields Rate for 1 Year Period",x
 
 
 
+
+
+
+
+bond_closing_yields_1year.ts = ts(data_inter$bond_closing_yields_1year,frequency=12,start = c(2003, 7))
+bond_closing_yields_1year.ts
+plot.ts(bond_closing_yields_1year.ts,main="Yield Rate for 1 Year Period",xlab="month",ylab="yield rate in percent",frequency=12,start = c(2003, 7))
+acf(bond_closing_yields_1year.ts,lag.max=48)  #autocorrelation
+acf((bond_closing_yields_1year.ts-mean(bond_closing_yields_1year.ts))^2 ,lag.max=48) #Heteroscedasticity 
+adf.test(bond_closing_yields_1year.ts) #stationary test, Time series are stationary if they do not have trend or seasonal effects, p-value is obtained is greater than significance level of 0.05 and the ADF statistic is higher than any of the critical values. Clearly, there is no reason to reject the null hypothesis. So, the time series is in fact non-stationary.
+
+decomp.bond_closing_yields_1year = decompose(bond_closing_yields_1year.ts)
+plot(decomp.bond_closing_yields_1year)
+
+
+
+
+
+
+
+
 data_f <- read_csv("/Users/jinkim/Library/CloudStorage/OneDrive-Personal/Aucklanduni/2023 S2/ECON 723/Group Project/final data.csv")
 y1.ts = ts(data_f$r1y_nz,frequency=12,start = c(1987, 7))
 y1.ts
 plot.ts(y1.ts,main="Yields Rate for 1 Year Period",xlab="Year",ylab="yield rate in percent",frequency=12,start = c(1987, 7))
 
-y2.ts = ts(data_f$r2y_gb,frequency=12,start = c(1987, 7))
+y2.ts = ts(data_f$r2y_nz,frequency=12,start = c(1987, 7))
 y2.ts
 plot.ts(y2.ts,main="Yields Rate for 2 Year Period",xlab="Year",ylab="yield rate in percent",frequency=12,start = c(1987, 7))
 
